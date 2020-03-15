@@ -1,6 +1,6 @@
-package com.example.springmvc.repos;
+package com.example.testregik.repos;
 
-import com.example.springmvc.domain.Message;
+import com.example.testregik.domain.Message;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

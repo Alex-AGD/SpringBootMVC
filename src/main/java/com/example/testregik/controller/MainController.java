@@ -1,16 +1,15 @@
-package com.example.springmvc.controller;
+package com.example.testregik.controller;
 
-import com.example.springmvc.domain.Message;
-import com.example.springmvc.repos.MessageRepo;
+import com.example.testregik.domain.Message;
+import com.example.testregik.domain.User;
+import com.example.testregik.repos.MessageRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.annotation.PostConstruct;
-import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -32,8 +31,12 @@ public class MainController {
     }
 
     @PostMapping("/main")    //@RequestParam берет Get запросы from url
-    public String add(@RequestParam String text, @RequestParam String tag, Map<String, Object> model) {
-        Message message = new Message(text, tag);
+    public String add(
+            @AuthenticationPrincipal User user,
+            @RequestParam String text,
+            @RequestParam String tag, Map<String, Object> model
+    ) {
+        Message message = new Message(text, tag, user);
 
         messageRepo.save(message);
 
@@ -47,6 +50,7 @@ public class MainController {
     @PostMapping("filter") //link for <form method="post" action="filter">
     public String filter(@RequestParam String filter, Map<String, Object> model) {
         Iterable<Message> messages;
+
         if (filter != null && filter.isEmpty()) {
             messages = messageRepo.findByTag(filter); //method return list
         } else {

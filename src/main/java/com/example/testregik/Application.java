@@ -1,4 +1,4 @@
-package com.example.springmvc;
+package com.example.testregik;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

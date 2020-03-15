@@ -1,8 +1,8 @@
-package com.example.springmvc.controller;
+package com.example.testregik.controller;
 
-import com.example.springmvc.domain.Role;
-import com.example.springmvc.domain.User;
-import com.example.springmvc.repos.UserRepo;
+import com.example.testregik.domain.Role;
+import com.example.testregik.domain.User;
+import com.example.testregik.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
