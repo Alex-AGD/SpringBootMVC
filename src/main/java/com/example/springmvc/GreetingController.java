@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -43,6 +44,18 @@ public class GreetingController {
 
         model.put("messages", messages);
 
+        return "main";
+    }
+
+    @PostMapping("filter") //link for <form method="post" action="filter">
+    public String filter(@RequestParam String filter, Map<String, Object> model) {
+        Iterable<Message> messages;
+        if (filter != null && filter.isEmpty()) {
+            messages = messageRepo.findByTag(filter); //method return list
+        } else {
+            messages = messageRepo.findAll(); //method return iterable
+        }
+        model.put("messages",messages);
         return "main";
     }
 }
